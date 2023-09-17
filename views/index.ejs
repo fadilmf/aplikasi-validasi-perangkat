@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Validasi</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark align-items-start">
+      <div class="container">
+        <a class="navbar-brand" href="/">Aplikasi Validasi</a>
+        <a class="btn btn-light" href="/logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span class="d-none d-sm-inline">Logout</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="search-bar">
+      <div class="container">
+        <div class="card mt-3 px-3 pt-3 rounded-5 shadow">
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Hai, <span class="fw-bold"><%= user.username %>!</span></p>
+            <% if (user.admin == 1) { %>
+
+            <a href="/dashboard" class="btn btn-1 rounded-pill"
+              >Admin Dashboard</a
+            >
+            <% } %>
+          </div>
+          <div class="row">
+            <form class="d-flex mb-3" role="search" action="/list" method="GET">
+              <div class="input-group">
+                <input
+                  class="form-control rounded-start-pill"
+                  type="search"
+                  name="sn"
+                  placeholder="Search serial number"
+                  aria-label="Search"
+                />
+                <button class="btn btn-1 btn-lg rounded-end-pill" type="submit">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Perangkat -->
+    <section class="device-list">
+      <div class="container">
+        <div class="bg-light mt-3 p-3 rounded-5">
+          <div class="row">
+            <!-- Perangkat Aktif -->
+            <div class="col-lg-4 mb-3">
+              <a href="/list" class="device-item">
+                <div class="img">
+                  <img
+                    src="/img/img_perangkat_aktif.svg"
+                    class="card-img"
+                    alt="Perangkat Aktif"
+                    style="width: 80px"
+                  />
+                </div>
+                <div class="detail-home ms-3">
+                  <p class="fw-semibold">Perangkat Aktif</p>
+                  <p class="jumlah-device"><%= allDeviceCount %></p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Perangkat Valid -->
+            <div class="col-lg-4 mb-3">
+              <a href="/list?status=1" class="device-item">
+                <div class="image-container">
+                  <img
+                    src="/img/img_perangkat_valid.svg"
+                    class="card-img"
+                    alt="Perangkat Aktif"
+                    style="width: 80px"
+                  />
+                  <div class="corner-icon">
+                    <i class="bi bi-check2-circle icon-green"></i>
+                  </div>
+                </div>
+                <div class="detail-home ms-3">
+                  <p class="fw-semibold">Perangkat Valid</p>
+                  <p class="jumlah-device"><%= validDeviceCount %></p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Perangkat Tidak Valid -->
+            <div class="col-lg-4 mb-3">
+              <a href="/list?status=0" class="device-item">
+                <div class="image-container">
+                  <img
+                    src="/img/img_perangkat_tidak_valid.svg"
+                    class="card-img"
+                    alt="Perangkat Aktif"
+                    style="width: 80px"
+                  />
+                  <div class="corner-icon">
+                    <i class="bi bi-x icon-red"></i>
+                  </div>
+                </div>
+                <div class="detail-home ms-3">
+                  <p class="fw-semibold">Perangkat Tidak Valid</p>
+                  <p class="jumlah-device"><%= notValidDeviceCount %></p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navbar (Mobile Only) -->
+    <nav class="bottom-navbar d-md-none">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <a href="/" class="navbar-link active">
+              <i class="bi bi-house-door"></i>
+              <span>Home</span>
+            </a>
+          </div>
+
+          <div class="col text-center">
+            <a href="/list?focusSearch=true" class="navbar-link">
+              <i class="bi bi-search"></i>
+              <span>Validasi</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
